@@ -2,7 +2,34 @@ import streamlit as st
 import pickle
 import os
 
-st.set_page_config(page_title="EcoPulse - Smart Campus Energy Optimizer", page_icon="⚡", layout="centered")
+st.set_page_config(
+    page_title="EcoPulse Dashboard",
+    page_icon="⚡",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# 2. Sidebar Controls (Step 3)
+with st.sidebar:
+    st.header("⚙️ Control Panel")
+    selected_zone = st.selectbox("Select Campus Zone", ["Block A", "Block B", "Hostel C", "Lab Complex"])
+    threshold = st.slider("Power Threshold Limit (kW)", 1.0, 10.0, 5.0)
+    st.markdown("---")
+    st.info("EcoPulse v2.1 | AI Energy Optimizer")
+
+# 3. Main Title & Metric Cards (Step 2)
+st.title("⚡ EcoPulse: Campus Energy & Load Optimizer")
+st.markdown("Real-time telemetry and linear regression prediction monitor.")
+
+col1, col2, col3 = st.columns(3)
+col1.metric(label="Active Rooms Monitored", value="10", delta="Normal")
+col2.metric(label="Predicted Power Draw", value="5.8 kW", delta="-12% Efficiency")
+col3.metric(label="Wastage Anomalies Caught", value="14", delta="Optimized")
+
+st.markdown("---")
+
+# Put your existing graphs, dataframes, and ML prediction code right below here!
+
 
 # Load model weights
 if os.path.exists('model.pkl'):
